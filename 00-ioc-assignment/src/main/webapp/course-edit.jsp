@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Using IoC Container</title>
+<title>Course Edit</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -21,10 +21,7 @@
 <body>
 
 	<div class="container mt-4">
-		<h1>Hello IoC Container</h1>
-		<h3>Courses</h3>
-		
-		 <a href="course-edit"  class="btn btn-outline-success">Add New</a>
+		<h1>Hello Course Edit</h1>
 	</div>
 	
      
