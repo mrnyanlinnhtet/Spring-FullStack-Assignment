@@ -10,4 +10,6 @@ public interface CourseModel {
 
 	void save(Course course);
 
+	Course findById(int id);
+
 }
