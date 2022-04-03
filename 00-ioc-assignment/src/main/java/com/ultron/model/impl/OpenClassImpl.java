@@ -1,9 +1,8 @@
-package com.ultron.impl;
+package com.ultron.model.impl;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.ultron.dto.Course;

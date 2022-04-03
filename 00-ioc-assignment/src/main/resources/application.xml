@@ -9,8 +9,8 @@
 			value="Hello IoC Container on Servlet" />
 	</bean>
 
-	<bean id="courseModel" class="com.ultron.impl.CourseModelImpl" />
-	<bean id="openClassModel" class="com.ultron.impl.OpenClassImpl" />
+	<bean id="courseModel" class="com.ultron.model.impl.CourseModelImpl" />
+	<bean id="openClassModel" class="com.ultron.model.impl.OpenClassImpl" />
 	<bean id="registrationModel"
-		class="com.ultron.impl.RegistrationImpl" />
+		class="com.ultron.model.impl.RegistrationImpl" />
 </beans>

@@ -1,4 +1,4 @@
-package com.ultron.impl;
+package com.ultron.model.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
