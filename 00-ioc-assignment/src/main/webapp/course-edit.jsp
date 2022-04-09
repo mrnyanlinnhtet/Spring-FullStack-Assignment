@@ -61,8 +61,9 @@
 					</div>
 					<!-- End of Course's Description -->
 
-					<input type="submit" value="Save Course" class="btn btn-primary">
+					<input type="submit" value="Save Course" class="btn btn-primary mx-2">
                     <!-- End of Submit Button -->
+                    <input type="reset" value="Clear Course" class="btn btn-danger">
 				</form>
 				<!-- End Of Form -->
 			</div>

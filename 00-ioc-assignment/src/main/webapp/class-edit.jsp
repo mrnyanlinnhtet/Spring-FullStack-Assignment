@@ -33,6 +33,20 @@
 				<form action="${save}" method="post">
 
 					<div class="mb-4">
+						<label for="id" class="form-label"><b>Course ID</b></label> <input
+							type="text" readonly="readonly" class="form-control" name="id"
+							value="${course.id }" required="required" />
+					</div>
+					<!-- End of Course Id -->
+					
+					<div class="mb-4">
+						<label for="courseName" class="form-label"><b>Course Name</b></label> <input
+							type="text" readonly="readonly" class="form-control" name="courseName"
+							value="${course.name }" required="required" />
+					</div>
+					<!-- End of Course Name -->
+
+					<div class="mb-4">
 						<label for="teacher" class="form-label"><b>Teacher</b></label> <input
 							type="text" class="form-control" name="teacher"
 							placeholder="Enter Teacher Name !" required="required" />
@@ -46,7 +60,8 @@
 					</div>
 					<!-- End of Start Date -->
 
-					<input type="submit" value="Save Class" class="btn btn-primary">
+					<input type="submit" value="Save Class" class="btn btn-primary mx-2">
+					<input type="reset" value="Clear Class" class="btn btn-danger">
 					<!-- End of Submit Button -->
 				</form>
 				<!-- End Of Form -->

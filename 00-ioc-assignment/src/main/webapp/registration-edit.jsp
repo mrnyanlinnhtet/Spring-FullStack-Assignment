@@ -30,6 +30,8 @@
 					<c:param name="classId" value="${openClass.id}"></c:param>
 				</c:url>
 				<form action="${save}" method="post">
+				
+				
 
 					<div class="mb-4">
 						<label for="student" class="form-label"><b>Student Name</b></label> <input
@@ -54,7 +56,8 @@
 
 					
 
-					<input type="submit" value="Save Class" class="btn btn-primary">
+					<input type="submit" value="Save Registration" class="btn btn-primary ">
+					<input type="submit" value="Clear Registration" class="btn btn-danger mx-2" >
 					<!-- End of Submit Button -->
 				</form>
 				<!-- End Of Form -->

@@ -30,6 +30,7 @@ public class RegistrationImpl implements RegistrationModel {
 				oc.setId(rs.getInt("id"));
 				oc.setStartDate(rs.getDate("start_date").toLocalDate());
 				oc.setTeacher(rs.getString("teacher"));
+				
 
 				Registration rg = new Registration();
 				rg.setOpenClass(oc);
