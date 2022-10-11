@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jdc.leaves.model.dto.input.TeacherForm;
 
 @Controller
-@RequestMapping("teacher")
+@RequestMapping("teachers")
 public class TeacherController {
 
 	@GetMapping
@@ -19,13 +19,13 @@ public class TeacherController {
     		@RequestParam Optional<String> phone, 
     		@RequestParam Optional<String> email) {
         // TODO implement here
-        return "";
+        return "teachers";
     }
 
 	@GetMapping("edit")
     public String edit(Optional<Integer> id) {
         // TODO implement here
-        return "";
+        return "teachers-edit";
     }
 
 	@PostMapping

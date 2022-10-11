@@ -25,13 +25,13 @@ public class ClassController {
     	@RequestParam Optional<LocalDate> to,
     	ModelMap model) {
         // TODO implement here
-        return "";
+        return "classes";
     }
 
     @GetMapping("edit")
     public String edit(@RequestParam Optional<Integer> id,ModelMap model) {
         // TODO implement here
-        return "";
+        return "classes-edit";
     }
 
     
@@ -44,16 +44,16 @@ public class ClassController {
     @GetMapping("{id}")
     public String showDetails(@PathVariable int id,ModelMap model) {
         // TODO implement here
-        return "";
+        return "classes-details";
     }
 
     @GetMapping("registration")
     public String editRegistration(@PathVariable int studentId,@PathVariable int classId,ModelMap model) {
         // TODO implement here
-        return "";
+        return "registration-edit";
     }
 
-    @PostMapping
+    @PostMapping("saveRegistration")
     public String saveRegistration(RegistrationForm form) {
         // TODO implement here
         return "";
@@ -62,7 +62,7 @@ public class ClassController {
     @GetMapping("registration/{classId}/{studentId}")
     public String showRegistrationDetails(@PathVariable int classId,@PathVariable int studentId,ModelMap model) {
         // TODO implement here
-        return "";
+        return "registration-details";
     }
 
 }
