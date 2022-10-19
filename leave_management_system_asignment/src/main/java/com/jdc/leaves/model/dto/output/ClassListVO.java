@@ -22,7 +22,7 @@ public class ClassListVO {
 
     private LocalDate startDate;
 
-    private int moths;
+    private int months;
 
     private String description;
 

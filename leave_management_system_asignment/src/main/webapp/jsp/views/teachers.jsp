@@ -16,16 +16,93 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+	integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<c:url value="/resources/application.css" var="cssLink"></c:url>
+<link rel="stylesheet" href="${cssLink}" />
 </head>
 <body>
 
-  <c:import url="/jsp/include/navbar.jsp">
-  <c:param name="view" value="teachers"></c:param>
-  </c:import>
-  
-  <!-- To Do  -->
-  <!-- Search Box -->
-  <!-- Table View -->
+	<c:import url="/jsp/include/navbar.jsp">
+		<c:param name="view" value="teachers"></c:param>
+	</c:import>
+
+
+	<div class="container">
+
+		<h1 class="my-4 text-success">
+		<i class="fas fa-user"></i>	<b>Teachers Management</b> 
+		</h1>
+
+		<form action="#" class="row">
+
+			<div class="col">
+				<div class="form-group">
+					<label for="name"><b>Name : </b></label> <input type="text"
+						id="name" class="form-control" placeholder="Enter Name !" />
+				</div>
+			</div>
+
+			<div class="col">
+				<div class="form-group">
+					<label for="phone"><b>Phone : </b></label> <input type="tel"
+						id="phone" class="form-control" placeholder="Enter Phone Number !" />
+				</div>
+			</div>
+
+			<div class="col">
+				<div class="form-group">
+					<label for="email"><b>Email : </b></label> <input type="email"
+						id="email" class="form-control" placeholder="Enter Email Address !" />
+				</div>
+			</div>
+
+			<div class="col btn-wrapper">
+				<button class="btn btn-outline-success mx-2">Search  <i class="fas fa-search"></i></button>
+				<c:url value="/teachers/edit" var="addNew"></c:url>
+				<a href="${addNew}" class="btn btn-outline-danger">Add New  <i class="fas fa-plus"></i></a>
+			</div>
+
+		</form>
+	</div>
+
+	<div class="container my-4">
+
+		<table class="table table-striped table-hover">
+
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Assign Date</th>
+					<th>Classes</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Mr Nyan Linn Htet</td>
+					<td>09444859894</td>
+					<td>mr.nyanlinnhtet13@gmail.com</td>
+					<td>2022-09-12</td>
+					<td>5</td>
+					<td><c:url value="/teachers/edit" var="teacherEdit">
+							<c:param name="id" value="1"></c:param>
+						</c:url> <a href="${teacherEdit}" class="btn btn-outline-warning">Edit <i class="fas fa-pen"></i></a>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+
 
 </body>
 </html>
