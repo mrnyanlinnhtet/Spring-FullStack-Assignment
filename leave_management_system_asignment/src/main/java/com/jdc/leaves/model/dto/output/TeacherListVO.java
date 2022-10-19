@@ -2,6 +2,8 @@ package com.jdc.leaves.model.dto.output;
 
 import java.time.LocalDate;
 
+import com.jdc.leaves.model.dto.input.TeacherForm;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,19 +11,23 @@ import lombok.Setter;
 @Setter
 public class TeacherListVO {
 
-    public TeacherListVO() {
-    }
+	public TeacherListVO() {
+	}
 
-    private int id;
+	private int id;
 
-    private String name;
+	private String name;
 
-    private String phone;
+	private String phone;
 
-    private String email;
+	private String email;
 
-    private LocalDate assignDate;
+	private LocalDate assignDate;
 
-    private long classCount;
+	private long classCount;
+
+	public TeacherForm teacherForm() {
+		return new TeacherForm(id, name, phone, email, assignDate);
+	}
 
 }
