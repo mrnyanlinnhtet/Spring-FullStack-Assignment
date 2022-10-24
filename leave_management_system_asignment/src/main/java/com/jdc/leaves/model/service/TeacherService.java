@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.leaves.model.dto.input.TeacherForm;
 import com.jdc.leaves.model.dto.output.IdWithName;
@@ -24,24 +25,24 @@ public class TeacherService {
 	private SimpleJdbcInsert accountInsert;
 	private SimpleJdbcInsert teacherInsert;
 
-	// TODO : set configuration for password encoder bean
 	@Autowired
 	private PasswordEncoder encoder;
 
-	// TODO : set configuration for dataSource bean
 	public TeacherService(DataSource dataSource) {
 		namedJdbc = new NamedParameterJdbcTemplate(dataSource);
 
 		// For Account Table
 		accountInsert = new SimpleJdbcInsert(dataSource);
 		accountInsert.setTableName("account");
-		accountInsert.setCatalogName("id");
+		accountInsert.setGeneratedKeyName("id");
+		accountInsert.setColumnNames(List.of("name", "role", "email", "password"));
 
 		// For Teacher Table
 		teacherInsert = new SimpleJdbcInsert(dataSource);
 		teacherInsert.setTableName("teacher");
 	}
 
+	@Transactional
 	public int save(TeacherForm form) {
 		if (form.getId() == 0) {
 			return insert(form);
