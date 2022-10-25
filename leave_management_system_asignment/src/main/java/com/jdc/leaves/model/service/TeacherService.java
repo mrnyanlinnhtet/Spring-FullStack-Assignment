@@ -8,11 +8,14 @@ import java.util.Optional;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jdc.leaves.model.dto.input.TeacherForm;
 import com.jdc.leaves.model.dto.output.IdWithName;
@@ -24,6 +27,18 @@ public class TeacherService {
 	private NamedParameterJdbcTemplate namedJdbc;
 	private SimpleJdbcInsert accountInsert;
 	private SimpleJdbcInsert teacherInsert;
+
+	private final String SELECT_PROJECTION = """
+			SELECT t.id,a.name,t.phone,a.email,t.assign_date assignDate,COUNT(c.id) classCount 
+			FROM teacher t
+			JOIN account a
+			ON a.id = t.id
+			LEFT JOIN classes c ON
+			 c.teacher_id = t.id
+						""";
+	private final String SELECT_GROUP_BY = "GROUP BY t.id,a.name,t.phone,a.email,t.assign_date";
+
+	private RowMapper<TeacherListVO> mapper;
 
 	@Autowired
 	private PasswordEncoder encoder;
@@ -40,6 +55,10 @@ public class TeacherService {
 		// For Teacher Table
 		teacherInsert = new SimpleJdbcInsert(dataSource);
 		teacherInsert.setTableName("teacher");
+
+		// For RowMapper
+		mapper = new BeanPropertyRowMapper<>(TeacherListVO.class);
+
 	}
 
 	@Transactional
@@ -50,16 +69,45 @@ public class TeacherService {
 		return edit(form);
 	}
 
+	// Search
 	public List<TeacherListVO> search(Optional<String> name, Optional<String> phone, Optional<String> email) {
-		// TODO implement here
-		return null;
+
+		var where = new StringBuffer();
+		var params = new HashMap<String, Object>();
+
+		// Dynamic Query For Email
+		where.append(email.filter(StringUtils::hasLength).map(a -> {
+			params.put("email", a.toLowerCase().concat("%"));
+			return "AND LOWER(a.email) LIKE :email";
+		}).orElse(""));
+
+		// Dynamic Query For Name
+		where.append(name.filter(StringUtils::hasLength).map(a -> {
+			params.put("name", a.toLowerCase().concat("%"));
+			return "AND LOWER(a.name) LIKE :name";
+		}).orElse(""));
+
+		// Dynamic Query For Phone
+		where.append(phone.filter(StringUtils::hasLength).map(t -> {
+			params.put("phone", t.concat("%"));
+			return "AND t.phone LIKE :phone";
+		}).orElse(""));
+
+		final String SQL = "%s WHERE 1=1 %s %s".formatted(SELECT_PROJECTION, where.toString(), SELECT_GROUP_BY);
+		return namedJdbc.query(SQL, params, mapper);
 	}
 
+	// Find By Id
 	public TeacherListVO findById(int id) {
-		// TODO implement here
-		return null;
+		final String SQL = "%s WHERE t.id=:id %s".formatted(SELECT_PROJECTION, SELECT_GROUP_BY);
+
+		var params = new HashMap<String, Object>();
+		params.put("id", id);
+
+		return namedJdbc.queryForObject(SQL, params, mapper);
 	}
 
+	// Get Available Teachers
 	public List<IdWithName> getAvailableTeachers() {
 		// TODO implement here
 		return null;

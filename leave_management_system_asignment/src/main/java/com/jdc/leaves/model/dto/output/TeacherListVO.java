@@ -24,7 +24,7 @@ public class TeacherListVO {
 
 	private LocalDate assignDate;
 
-	private long classCount;
+	private int classCount;
 
 	public TeacherForm teacherForm() {
 		return new TeacherForm(id, name, phone, email, assignDate);

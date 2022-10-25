@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +17,40 @@ import com.jdc.leaves.model.dto.input.TeacherForm;
 import com.jdc.leaves.model.service.TeacherService;
 
 @SpringJUnitConfig(locations = "/root-config.xml")
-@Sql(scripts = "/sql/truncate_db.sql")
+@TestMethodOrder(OrderAnnotation.class)
 public class TeacherServiceTest {
 
 	@Autowired
 	private TeacherService service;
 
+	@Order(1)
 	@ParameterizedTest
+	@Sql(scripts = "/sql/truncate_db.sql")
 	@CsvSource(value = "0,Min Lwin,09223453,lwinmin@gmail.com,2022-09-09")
 	void save_insert_success(int id, String name, String phone, String email, LocalDate assignDate) {
 		var form = new TeacherForm(id, name, phone, email, assignDate);
 		var result = service.save(form);
 		assertEquals(1, result);
+	}
+	
+
+	@Order(2)
+	@ParameterizedTest
+	@Sql(scripts = {"/sql/truncate_db.sql",
+			        "/sql/teacher.sql"})
+	@CsvSource(value = {"1,Min Lwin,0911111,lwinmin@gmail.com,2022-09-09,2",
+			            "2,Waifer Kolar,0922222,waifer@gmail.com,2022-10-10,1",
+			            "3,Khant Zaw,0933333,khantzaw@gmail.com,2022-12-01,0"
+	})
+	void find_by_id_test(int id, String name, String phone, String email, LocalDate assignDate,int classCount) {
+		 var obj = service.findById(id);
+		 
+		 assertEquals(id,obj.getId());
+		 assertEquals(name,obj.getName());
+		 assertEquals(phone,obj.getPhone());
+		 assertEquals(email,obj.getEmail());
+		 assertEquals(assignDate,obj.getAssignDate());
+		 assertEquals(classCount, obj.getClassCount());
 	}
 
 }
