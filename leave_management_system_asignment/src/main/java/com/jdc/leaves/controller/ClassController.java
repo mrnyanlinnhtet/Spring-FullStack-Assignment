@@ -3,6 +3,7 @@ package com.jdc.leaves.controller;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jdc.leaves.model.dto.input.ClassForm;
 import com.jdc.leaves.model.dto.input.RegistrationForm;
+import com.jdc.leaves.model.service.ClassService;
+import com.jdc.leaves.model.service.RegistrationService;
 
 @Controller
 @RequestMapping("/classes")
 public class ClassController {
+	
+	@Autowired
+	private ClassService classService;
+	@Autowired
+	private RegistrationService regService;
 
     @GetMapping
     public String index(
@@ -24,7 +32,8 @@ public class ClassController {
     	@RequestParam Optional<LocalDate> from, 
     	@RequestParam Optional<LocalDate> to,
     	ModelMap model) {
-        // TODO implement here
+       var result = classService.search(teacher, from, to);
+       model.put("list", result);
         return "classes";
     }
 

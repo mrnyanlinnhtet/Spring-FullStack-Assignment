@@ -78,19 +78,19 @@ public class TeacherService {
 		// Dynamic Query For Email
 		where.append(email.filter(StringUtils::hasLength).map(a -> {
 			params.put("email", a.toLowerCase().concat("%"));
-			return "AND LOWER(a.email) LIKE :email";
+			return "AND LOWER(a.email) LIKE :email ";
 		}).orElse(""));
 
 		// Dynamic Query For Name
 		where.append(name.filter(StringUtils::hasLength).map(a -> {
 			params.put("name", a.toLowerCase().concat("%"));
-			return "AND LOWER(a.name) LIKE :name";
+			return "AND LOWER(a.name) LIKE :name ";
 		}).orElse(""));
 
 		// Dynamic Query For Phone
 		where.append(phone.filter(StringUtils::hasLength).map(t -> {
 			params.put("phone", t.concat("%"));
-			return "AND t.phone LIKE :phone";
+			return "AND t.phone LIKE :phone ";
 		}).orElse(""));
 
 		final String SQL = "%s WHERE 1=1 %s %s".formatted(SELECT_PROJECTION, where.toString(), SELECT_GROUP_BY);
