@@ -24,6 +24,7 @@ import com.jdc.leaves.model.dto.output.TeacherListVO;
 @Service
 public class TeacherService {
 
+	
 	private NamedParameterJdbcTemplate namedJdbc;
 	private SimpleJdbcInsert accountInsert;
 	private SimpleJdbcInsert teacherInsert;
@@ -37,6 +38,12 @@ public class TeacherService {
 			 c.teacher_id = t.id
 						""";
 	private final String SELECT_GROUP_BY = "GROUP BY t.id,a.name,t.phone,a.email,t.assign_date";
+	
+	private static final String SELECT_DATA = """
+			SELECT t.id,a.name 
+			FROM teacher t JOIN account a
+			ON t.id = a.id WHERE deleted =:delete 
+			""";
 
 	private RowMapper<TeacherListVO> mapper;
 
@@ -109,8 +116,9 @@ public class TeacherService {
 
 	// Get Available Teachers
 	public List<IdWithName> getAvailableTeachers() {
-		// TODO implement here
-		return null;
+		var params = new HashMap<String, Object>();
+		params.put("delete", false);
+		return namedJdbc.query(SELECT_DATA, params,new BeanPropertyRowMapper<>(IdWithName.class));
 	}
 
 	// Insert Form

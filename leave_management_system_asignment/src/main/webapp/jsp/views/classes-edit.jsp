@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +18,72 @@
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
 </head>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+	integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <body>
 
   <c:import url="/jsp/include/navbar.jsp">
   <c:param name="view" value="classes"></c:param>
   </c:import>
+  
+  <div class="container">
+  
+   <h1 class="text-success my-3"><b>${empty param.id?'<i class="fas fa-user-plus"></i> Add New Class':'<i class="fas fa-user-edit"></i> Edit Class'}</b></h1>
+  
+   <div class="row">
+   
+   <!-- Form -->
+    <c:url value="/classes" var="save"></c:url>
+    <sf:form action="${save}" method="post" cssClass="col-6" modelAttribute="formSave">
+    
+     <sf:hidden path="id"/>
+     
+      <div class="form-group my-4">
+       <label for="teachers" class="form-label"><b>Teachers : </b></label>
+       <sf:select  path="teacher" id="teachers" items="${teachers}" itemLabel="name" itemValue="id" cssClass="form-select">
+       </sf:select>
+      </div>
+      
+      <div class="row">
+      
+      <div class="form-group col">
+      <label for="start" class="form-label"><b>Start Date : </b></label>
+      <sf:input path="start" id="start" type="date" cssClass="form-control"/>
+      </div>
+      
+       <div class="form-group col mx-2">
+       <label for="months" class="form-label"><b>Months : </b></label>
+       <sf:input path="months" id="months" type="number" cssClass="form-control"/>
+      </div>
+      
+      </div>
+      
+      <div class="row my-5">
+       <div class="col form-group">
+        <label for="description" class="form-label"><b>Description : </b></label>
+        <sf:textarea path="description" id="description" cssClass="form-control" placeholder="Enter Description !"/>
+       </div>
+      </div>
+      
+      <div class="row">
+      <div class="col-2">
+      <div class="form-group">
+       <button type="submit" class="btn btn-success form-control">Save</button>
+      </div>
+      </div>
+      </div>
+      
+      
+     
+     
+    </sf:form>
+   
+   </div>
+  
+  </div>
 
 </body>
 </html>
