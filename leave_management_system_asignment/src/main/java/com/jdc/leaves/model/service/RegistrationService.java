@@ -26,7 +26,6 @@ public class RegistrationService {
     }
 
     public RegistrationForm getFormById(int classId, int studentId) {
-        // TODO implement here
         return null;
     }
 
