@@ -7,19 +7,20 @@ import lombok.Setter;
 @Setter
 public class RegistrationForm {
 
-    public RegistrationForm() {
-    }
+	public RegistrationForm() {
+	}
 
-    private int classId;
+	private int id;
+	private int classId;
 
-    private int studentId;
+	private int studentId;
 
-    private String studentName;
+	private String studentName;
 
-    private String email;
+	private String email;
 
-    private String phone;
+	private String phone;
 
-    private String education;
+	private String education;
 
 }

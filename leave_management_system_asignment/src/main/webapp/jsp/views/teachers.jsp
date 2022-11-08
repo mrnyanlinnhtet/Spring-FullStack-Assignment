@@ -94,7 +94,7 @@
 					<td>5</td>
 					<td><c:url value="/teachers/edit" var="teacherEdit">
 							<c:param name="id" value="1"></c:param>
-						</c:url> <a href="${teacherEdit}" class="btn btn-outline-warning">Edit <i class="fas fa-pen"></i></a>
+						</c:url> <a href="${teacherEdit}"><i class="fas fa-pencil-alt"></i></a>
 					</td>
 				</tr>
 			</tbody>

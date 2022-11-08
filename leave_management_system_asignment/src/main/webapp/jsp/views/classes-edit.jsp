@@ -71,7 +71,7 @@
       <div class="row">
       <div class="col-2">
       <div class="form-group">
-       <button type="submit" class="btn btn-success form-control">Save</button>
+       <button type="submit" class="btn btn-success form-control">Save <i class="fas fa-save"></i></button>
       </div>
       </div>
       </div>

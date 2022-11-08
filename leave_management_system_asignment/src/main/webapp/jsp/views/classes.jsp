@@ -103,7 +103,10 @@
 							<c:param name="id" value="1"></c:param>
 						</c:url> 
 						
-					<a href="${classEdit}" class="btn btn-outline-warning">Edit <i class="fas fa-pen"></i></a> 
+					<a href="${classEdit}" class="mx-4"><i class="fas fa-pencil-alt"></i></a> 
+					
+					<c:url value="/classes/1" var="class_detail"></c:url>
+                    <a href="${class_detail}"><i class="fas fa-external-link-square-alt"></i></a>
 						
 						</td>
 				</tr>

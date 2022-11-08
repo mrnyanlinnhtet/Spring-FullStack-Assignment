@@ -69,7 +69,7 @@ public class ClassController {
 	@PostMapping("saveRegistration")
 	public String saveRegistration(@ModelAttribute("regiForm")RegistrationForm form) {
 		regService.save(form);
-		return "classes/registration/%d/%d".formatted(form.getClassId(),form.getStudentId());
+		return "redirect:/classes/registration/%d/%d".formatted(form.getClassId(),form.getStudentId());
 	}
 
 	@GetMapping("registration/{classId}/{studentId}")

@@ -8,7 +8,7 @@
    <th>Registration Date</th>
    <th>Student</th>
    <th>Phone</th>
-   <th>Edit</th>
+   <th></th>
    </tr>
   </thead>
   <tbody>
@@ -21,7 +21,14 @@
      <c:url value="/classes/registration" var="regEdit">
      <c:param name="id" value="1"></c:param>
      </c:url>
-      <a href="${regEdit}" class="btn btn-outline-warning">Edit <i class="fas fa-pen"></i></a>
+      <a href="${regEdit}" class="mx-3"><i class="fas fa-pencil-alt"></i></a>
+      
+      
+      
+      
+      <c:url value="/classes/registration/1/1" var="reg_detail">
+      </c:url>
+      <a href="${reg_detail}"><i class="fas fa-external-link-square-alt"></i></a>
      </td>
    </tr>
   </tbody>
