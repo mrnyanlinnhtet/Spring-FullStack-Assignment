@@ -19,7 +19,6 @@
      <td>09444859894</td>
      <td>
      <c:url value="/classes/registration" var="regEdit">
-     <c:param name="id" value="1"></c:param>
      </c:url>
       <a href="${regEdit}" class="mx-3"><i class="fas fa-pencil-alt"></i></a>
       

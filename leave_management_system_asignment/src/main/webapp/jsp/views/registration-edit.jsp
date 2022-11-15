@@ -30,7 +30,7 @@
   </c:import>
 
   <div class="container">
-    <h1 class="text-success my-4">${empty param.id?'Add New':'Edit' } Registration</h1>
+    <h1 class="text-success my-4">${empty param.studentId?'Edit':'Add New' } Registration</h1>
      
       <div class="row">
       

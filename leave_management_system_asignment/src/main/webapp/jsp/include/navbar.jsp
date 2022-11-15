@@ -13,7 +13,7 @@
  
  <div class="container my-2">
    
-   <a href="${home}" class="navbar-brand"><b>Leave Registration System</b></a>
+   <a href="${home}" class="navbar-brand"><b><i class="fas fa-chalkboard-teacher"></i> Leave Registration System</b></a>
    
     <ul class="navbar-nav">
     
