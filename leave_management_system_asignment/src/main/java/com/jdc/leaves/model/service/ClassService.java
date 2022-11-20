@@ -30,7 +30,7 @@ public class ClassService {
 			 JOIN account a ON a.id = t.id
 			 LEFT JOIN registration r ON c.id = r.classes_id WHERE 1 = 1""";
 
-	private static final String SELECT_GROUP_BY = "GROUP BY c.id, t.id,a.name,t.phone,c.start_date,c.months,c.description";
+	private static final String SELECT_GROUP_BY = " GROUP BY c.id, t.id,a.name,t.phone,c.start_date,c.months,c.description";
 
 	private NamedParameterJdbcTemplate template;
 	private SimpleJdbcInsert insert;
