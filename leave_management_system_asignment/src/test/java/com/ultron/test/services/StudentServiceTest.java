@@ -47,7 +47,7 @@ public class StudentServiceTest {
 	@CsvSource(value = "nyan@gmail.com")
 	void find_by_email(String email) {
 		var stu = studentService.findByEmail(email);
-		assertEquals("Nyan Linn Htet",stu.getName());
+		assertEquals(1, stu);
 	}
 	
 	@Order(3)

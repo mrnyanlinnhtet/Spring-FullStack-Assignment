@@ -12,7 +12,8 @@ public class ClassListVO {
     public ClassListVO() {
     }
 
-    private int id;
+   
+	private int id;
 
     private int teacherId;
 
@@ -27,5 +28,21 @@ public class ClassListVO {
     private String description;
 
     private long studentCount;
+
+	public ClassListVO(int id, int teacherId, String teacherName, String teacherPhone, LocalDate startDate, int months,
+			String description, long studentCount) {
+		super();
+		this.id = id;
+		this.teacherId = teacherId;
+		this.teacherName = teacherName;
+		this.teacherPhone = teacherPhone;
+		this.startDate = startDate;
+		this.months = months;
+		this.description = description;
+		this.studentCount = studentCount;
+	}
+    
+    
+    
 
 }

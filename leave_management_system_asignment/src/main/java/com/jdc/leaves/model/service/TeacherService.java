@@ -37,7 +37,7 @@ public class TeacherService {
 			LEFT JOIN classes c ON
 			 c.teacher_id = t.id
 						""";
-	private final String SELECT_GROUP_BY = "GROUP BY t.id,a.name,t.phone,a.email,t.assign_date";
+	private final String SELECT_GROUP_BY = " GROUP BY t.id,a.name,t.phone,a.email,t.assign_date";
 	
 	private static final String SELECT_DATA = """
 			SELECT t.id,a.name 

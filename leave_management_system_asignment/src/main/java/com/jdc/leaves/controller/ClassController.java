@@ -74,8 +74,8 @@ public class ClassController {
 
 	@GetMapping("registration/{classId}/{studentId}")
 	public String showRegistrationDetails(@PathVariable int classId, @PathVariable int studentId, ModelMap model) {
-		var result = regService.findDetailsById(classId, studentId);
-		model.put("dto", result);
+//		var result = regService.findDetailsById(classId, studentId);
+//		model.put("dto", result);
 		return "registration-details";
 	}
 

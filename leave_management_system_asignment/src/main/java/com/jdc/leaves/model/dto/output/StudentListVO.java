@@ -22,4 +22,16 @@ public class StudentListVO {
 
     private long classCount;
 
+	public StudentListVO(int id, String name, String phone, String email, String education, long classCount) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.education = education;
+		this.classCount = classCount;
+	}
+    
+    
+
 }

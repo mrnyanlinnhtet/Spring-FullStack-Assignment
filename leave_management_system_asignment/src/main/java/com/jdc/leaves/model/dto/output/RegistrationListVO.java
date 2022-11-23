@@ -29,5 +29,7 @@ public class RegistrationListVO {
     private String studentPhone;
 
     private LocalDate registrationDate;
+    
+    
 
 }

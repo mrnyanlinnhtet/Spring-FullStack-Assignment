@@ -79,12 +79,12 @@ public class StudentService {
 	}
 
 	// Find By Email
-	public StudentListVO findByEmail(String email) {
+	public Integer findByEmail(String email) {
 		final String FIND_BY_EMAIL_QUERY = "%s AND email LIKE :email %s".formatted(SELECT_PROJECTION, SELECT_GROUP_BY);
 		var params = new HashMap<String, Object>();
 		params.put("email", email.toLowerCase().concat("%"));
 
-		return template.queryForObject(FIND_BY_EMAIL_QUERY, params, new BeanPropertyRowMapper<>(StudentListVO.class));
+		return template.queryForList(FIND_BY_EMAIL_QUERY, params,Integer.class).stream().findFirst().orElse(null);
 	}
 
 	// Create Student Process
@@ -115,5 +115,7 @@ public class StudentService {
 		param.put("id", id);
 		return template.queryForObject(FIND_BY_ID_QUERY, param, new BeanPropertyRowMapper<>(StudentListVO.class));
 	}
+	
+	
 
 }

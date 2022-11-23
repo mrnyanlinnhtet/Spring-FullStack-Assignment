@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jdc.leaves.model.dto.input.ClassForm;
@@ -28,7 +29,7 @@ public class ClassService {
 			c.description description,COUNT(r.student_id) studentCount FROM
 			 classes c JOIN teacher t ON t.id = c.teacher_id
 			 JOIN account a ON a.id = t.id
-			 LEFT JOIN registration r ON c.id = r.classes_id WHERE 1 = 1""";
+			 LEFT JOIN registration r ON c.id = r.classes_id WHERE 1 = 1  """;
 
 	private static final String SELECT_GROUP_BY = " GROUP BY c.id, t.id,a.name,t.phone,c.start_date,c.months,c.description";
 
@@ -56,31 +57,31 @@ public class ClassService {
 	// Dynamic Search
 	public List<ClassListVO> search(Optional<String> teacher, Optional<LocalDate> from, Optional<LocalDate> to) {
 
-		var sb = new StringBuffer(SELECT_PROJECTION);
+		var where = new StringBuffer();
 
 		var params = new HashMap<String, Object>();
 
 		// Search With Teacher Name
-		sb.append(teacher.filter(StringUtils::hasText).map(a -> {
+		where.append(teacher.filter(StringUtils::hasText).map(a -> {
 			params.put("teacher", a.toLowerCase().concat("%"));
-			return " AND LOWER(a.name) LIKE :teaher";
-		}));
+			return " AND LOWER(a.name) LIKE :teacher";
+		}).orElse(""));
 
 		// Search With Date From
-		sb.append(from.map(a -> {
+		where.append(from.map(a -> {
 			params.put("from", Date.valueOf(a));
 			return " AND c.start_date >= :from";
-		}));
+		}).orElse(""));
 
 		// Search With Date To
-		sb.append(to.map(a -> {
+		where.append(to.map(a -> {
 			params.put("to", Date.valueOf(a));
 			return " AND c.start_date <= :to";
-		}));
+		}).orElse(""));
 
-		sb.append(SELECT_GROUP_BY);
+		final String SQL = "%s %s %s".formatted(SELECT_PROJECTION,where.toString(),SELECT_GROUP_BY);
 
-		return template.query(sb.toString(), params, mapper);
+		return template.query(SQL, params, mapper);
 	}
 
 	public ClassForm findById(int classId) {
@@ -118,6 +119,7 @@ public class ClassService {
 	}
 
 	// Save Process
+	@Transactional
 	public int save(ClassForm form) {
 		if (form.getId() == 0) {
 			return insert(form);

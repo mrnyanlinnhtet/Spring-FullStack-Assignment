@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
 
 import com.jdc.leaves.model.dto.input.LeaveForm;
@@ -12,8 +16,22 @@ import com.jdc.leaves.model.dto.output.LeaveSummaryVO;
 
 @Service
 public class LeaveService {
+	
+	private SimpleJdbcInsert leavesInsert;
+	private SimpleJdbcInsert dayInsert;
+	private NamedParameterJdbcTemplate template;
 
-    public LeaveService() {
+    public LeaveService(DataSource dataSource) {
+    	
+    	template = new NamedParameterJdbcTemplate(dataSource);
+    	
+    	leavesInsert = new SimpleJdbcInsert(dataSource);
+    	leavesInsert.setTableName("leaves");
+    	
+    	dayInsert = new SimpleJdbcInsert(dataSource);
+    	dayInsert.setTableName("leaves_day");
+    	
+    	
     }
 
     public List<LeaveListVO> search(Optional<Integer> classId, Optional<String> studentName, Optional<LocalDate> from, Optional<LocalDate> to) {
@@ -21,7 +39,7 @@ public class LeaveService {
         return null;
     }
 
-    public LeaveForm findById(int id) {
+    public LeaveForm findLeaveForClass(int classId,LocalDate date) {
         // TODO implement here
         return null;
     }

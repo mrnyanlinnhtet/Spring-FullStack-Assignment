@@ -25,7 +25,7 @@
       
       
       
-      <c:url value="/classes/registration/1/1" var="reg_detail">
+      <c:url value="/classes/registration/0/0" var="reg_detail">
       </c:url>
       <a href="${reg_detail}"><i class="fas fa-external-link-square-alt"></i></a>
      </td>

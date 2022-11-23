@@ -13,6 +13,7 @@ public class ClassListVORowMapper implements RowMapper<ClassListVO> {
 	public ClassListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		var vo = new ClassListVO();
 		vo.setId(rs.getInt("id"));
+		vo.setTeacherName(rs.getString("teacherName"));
 		vo.setTeacherId(rs.getInt("teacherId"));
 		vo.setTeacherPhone(rs.getString("teacherPhone"));
 		vo.setStartDate(rs.getDate("startDate").toLocalDate());
