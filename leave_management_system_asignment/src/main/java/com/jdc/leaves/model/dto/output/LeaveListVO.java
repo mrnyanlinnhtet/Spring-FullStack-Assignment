@@ -2,6 +2,8 @@ package com.jdc.leaves.model.dto.output;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +14,7 @@ public class LeaveListVO {
     public LeaveListVO() {
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applyDate;
 
     private int classId;
@@ -26,6 +29,7 @@ public class LeaveListVO {
 
     private String teacher;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     private int days;
