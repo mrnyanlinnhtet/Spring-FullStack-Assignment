@@ -31,8 +31,7 @@
   
   <div class="container">
   
-   <h1 class="text-success my-3"><b>${empty param.id?'<i class="fas fa-user-plus"></i> Add New Class':'<i class="fas fa-user-edit"></i> Edit Class'}</b></h1>
-  
+   <h1 class="text-success my-3"><b>${param.id eq '0'?'<i class="fas fa-user-plus"></i> Add New Class':'<i class="fas fa-user-edit"></i> Edit Class'}</b></h1>
    <div class="row">
    
    <!-- Form -->
@@ -42,9 +41,12 @@
      <sf:hidden path="id"/>
      
       <div class="form-group my-4">
-       <label for="teachers" class="form-label"><b>Teachers : </b></label>
-       <sf:select  path="teacher" id="teachers" items="${teachers}" itemLabel="name" itemValue="id" cssClass="form-select">
+       <label for="teachers" class="form-lable"><b>Teachers : </b></label>
+       <sf:select path="teacher" cssClass="form-select">
+       <sf:option  value="0">Select Teachers</sf:option>
+       <sf:options items="${teachers}"  itemLabel="name" itemValue="id"/>
        </sf:select>
+      <sf:errors path="teacher" cssClass="text-danger"></sf:errors>
       </div>
       
       <div class="row">
@@ -52,11 +54,13 @@
       <div class="form-group col">
       <label for="start" class="form-label"><b>Start Date : </b></label>
       <sf:input path="start" id="start" type="date" cssClass="form-control"/>
+      <sf:errors path="start" cssClass="text-danger"></sf:errors>
       </div>
       
        <div class="form-group col mx-2">
        <label for="months" class="form-label"><b>Months : </b></label>
        <sf:input path="months" id="months" type="number" cssClass="form-control"/>
+       <sf:errors path="months" cssClass="text-danger"></sf:errors>
       </div>
       
       </div>
@@ -65,6 +69,7 @@
        <div class="col form-group">
         <label for="description" class="form-label"><b>Description : </b></label>
         <sf:textarea path="description" id="description" cssClass="form-control" placeholder="Enter Description !"/>
+        <sf:errors path="description" cssClass="text-danger"></sf:errors>
        </div>
       </div>
       

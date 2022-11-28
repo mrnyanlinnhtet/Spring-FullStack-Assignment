@@ -2,9 +2,12 @@ package com.jdc.leaves.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +19,7 @@ import com.jdc.leaves.model.dto.output.TeacherListVO;
 import com.jdc.leaves.model.service.TeacherService;
 
 @Controller
-@RequestMapping("teachers")
+@RequestMapping("/teachers")
 public class TeacherController {
 
 	@Autowired
@@ -36,14 +39,17 @@ public class TeacherController {
 	}
 
 	@PostMapping
-	public String save(@ModelAttribute("form") TeacherForm form) {
+	public String save(@Valid @ModelAttribute("form") TeacherForm form,BindingResult result) {
+		if(result.hasErrors()) {
+			return "teachers-edit";
+		}
 		teacherService.save(form);
 		return "redirect:/teachers";
 	}
 
 	@ModelAttribute("form")
 	public TeacherForm teacherFormBinding(@RequestParam(required = false) Optional<Integer> id) {
-		return id.map(teacherService::findById).map(TeacherListVO::teacherForm).orElse(new TeacherForm());
+		return id.filter(a->a>0).map(teacherService::findById).map(TeacherListVO::teacherForm).orElse(new TeacherForm());
 	}
 
 }

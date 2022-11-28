@@ -5,7 +5,9 @@
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
@@ -15,6 +17,7 @@
 	<context:component-scan
 		base-package="com.jdc.leaves.model.service">
 	</context:component-scan>
+	
 
 	<!-- Password Encoder -->
 	<bean id="encoder"
@@ -27,6 +30,11 @@
 		p:url="jdbc:mysql://localhost:3306/leaves_db" p:username="root"
 		p:password="admin">
 	</bean>
+	
+	<!-- Bean of ADMIN User Initializer -->
+	<bean id="initializer" class="com.jdc.leaves.model.security.AdminUserInitializer">
+	 <constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
 
 	<!-- Transaction Manager -->
 	<bean id="transactionManager"
@@ -37,5 +45,46 @@
 	<!-- Transaction Manager Annotation Driven -->
 	<tx:annotation-driven
 		transaction-manager="transactionManager" />
+	
+	<!-- Bean for LeaveApplicationUserService Class -->
+	<bean id="leaveUserService" class="com.jdc.leaves.model.security.LeaveApplicationUserService">
+	 <constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
+
+<!-- Authentication Manger Configuration -->
+	<security:authentication-manager id="authManager">
+		<security:authentication-provider
+			user-service-ref="leaveUserService">
+		<security:password-encoder ref="encoder" />
+		</security:authentication-provider>
+		
+	</security:authentication-manager>
+	
+	<!-- HTTP Security -->
+	<security:http>
+	   <!-- Form Login -->
+	   <security:form-login login-page="/signin"
+	   	authentication-failure-url="/signin?error=1"
+	   	login-processing-url="/signin" username-parameter="username"
+	   	password-parameter="password" default-target-url="/" />
+
+	   <!-- Form Logout -->
+	   <security:logout invalidate-session="true" logout-success-url="/"
+	   	logout-url="/signout" />
+
+
+	   <!-- Intercept URL Pattern -->
+		<security:intercept-url pattern="/classes/**"
+			access='hasAnyAuthority("Admin","Teacher")' />
+		<security:intercept-url pattern="/leaves/**"
+			access='hasAnyAuthority("Admin","Teacher","Student")' />
+		<security:intercept-url pattern="/students/**"
+			access='hasAnyAuthority("Admin","Teacher")' />
+		<security:intercept-url pattern="/teachers/**"
+			access='hasAuthority("Admin")' />
+		<security:intercept-url pattern="/home/**"
+			access='isAuthenticated()' />
+		
+	</security:http>
 
 </beans>

@@ -35,27 +35,27 @@
 		<h1 class="my-4 text-success">
 		<i class="fas fa-user"></i>	<b>Teachers Management</b> 
 		</h1>
-
-		<form action="#" class="row">
+       <c:url value="/teachers" var="search"></c:url>
+		<form action="${search}" class="row">
 
 			<div class="col">
 				<div class="form-group">
-					<label for="name"><b>Name : </b></label> <input type="text"
-						id="name" class="form-control" placeholder="Enter Name !" />
+					<label for="name"><b>Name : </b></label> <input type="text" value="${param.name}"
+						id="name" class="form-control" placeholder="Enter Name !" name="name" />
 				</div>
 			</div>
 
 			<div class="col">
 				<div class="form-group">
-					<label for="phone"><b>Phone : </b></label> <input type="tel"
-						id="phone" class="form-control" placeholder="Enter Phone Number !" />
+					<label for="phone"><b>Phone : </b></label> <input type="tel" value="${param.phone}"
+						id="phone" class="form-control" placeholder="Enter Phone Number !" name="phone" />
 				</div>
 			</div>
 
 			<div class="col">
 				<div class="form-group">
-					<label for="email"><b>Email : </b></label> <input type="email"
-						id="email" class="form-control" placeholder="Enter Email Address !" />
+					<label for="email"><b>Email : </b></label> <input type="email" value="${param.email}"
+						id="email" class="form-control" placeholder="Enter Email Address !" name="email" />
 				</div>
 			</div>
 
@@ -69,10 +69,17 @@
 	</div>
 
 	<div class="container my-4">
-
-		<table class="table table-striped table-hover">
+	
+	  <c:choose>
+	   <c:when test="${empty list}">
+	   <div class="alert alert-info">There is no data !</div>
+	   </c:when>
+	   
+	   <c:otherwise>
+	   <table class="table table-striped table-hover">
 
 			<thead>
+			
 				<tr>
 					<th>Id</th>
 					<th>Name</th>
@@ -85,21 +92,28 @@
 			</thead>
 
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>Mr Nyan Linn Htet</td>
-					<td>09444859894</td>
-					<td>mr.nyanlinnhtet13@gmail.com</td>
-					<td>2022-09-12</td>
-					<td>5</td>
+			<c:forEach items="${list}" var="t">
+			<tr>
+					<td>${t.id}</td>
+					<td>${t.name}</td>
+					<td>${t.phone}</td>
+					<td>${t.email}</td>
+					<td>${t.assignDate}</td>
+					<td>${t.classCount }</td>
 					<td><c:url value="/teachers/edit" var="teacherEdit">
-							<c:param name="id" value="1"></c:param>
+							<c:param name="id" value="${t.id}"></c:param>
 						</c:url> <a href="${teacherEdit}"><i class="fas fa-pencil-alt"></i></a>
 					</td>
 				</tr>
+			</c:forEach>
+				
 			</tbody>
 
 		</table>
+	   </c:otherwise>
+	  </c:choose>
+
+		
 
 	</div>
 

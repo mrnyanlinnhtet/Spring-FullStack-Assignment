@@ -126,7 +126,7 @@ public class TeacherService {
 		// Insert To Account
 		var paramsForAccount = new HashMap<String, Object>();
 		paramsForAccount.put("name", form.getName());
-		paramsForAccount.put("role", "TEACHER");
+		paramsForAccount.put("role", "Teacher");
 		paramsForAccount.put("email", form.getEmail());
 		paramsForAccount.put("password", encoder.encode(form.getPhone()));
 		var account = accountInsert.executeAndReturnKey(paramsForAccount);

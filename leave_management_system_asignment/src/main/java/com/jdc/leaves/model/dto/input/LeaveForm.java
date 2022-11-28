@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,12 +24,16 @@ public class LeaveForm {
 
     private int studentId;
 
+    @NotNull(message = "Please enter apply date !")
     private LocalDate applyDate;
 
+    @NotNull(message = "Please enter start date !")
     private LocalDate startDate;
 
+    @Min(value = 2,message = "Please enter leave day !")
     private int days;
 
+    @NotEmpty(message = "Please enter reason for leave !")
     private String reason;
 
 	public LeaveForm(int classId, int studentId, LocalDate applyDate, LocalDate startDate, int days, String reason) {
@@ -37,6 +45,14 @@ public class LeaveForm {
 		this.days = days;
 		this.reason = reason;
 	}
+	
+	public LeaveForm(int classId, int studentId) {
+		super();
+		this.classId = classId;
+		this.studentId = studentId;
+	}
+	
+	
 	
 	public List<Map<String, Object>> leavesDaysInsert() {
 		return IntStream.iterate(0, count -> count + 1).limit(days)
@@ -53,6 +69,12 @@ public class LeaveForm {
 				"leave_date", leaveDate
 		);
 	}
+
+
+
+	
+
+
 	
     
     

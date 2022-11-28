@@ -3,9 +3,12 @@ package com.jdc.leaves.controller;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +50,13 @@ public class ClassController {
 	}
 
 	@PostMapping
-	public String save(@ModelAttribute("formSave") ClassForm form) {
+	public String save(@Valid @ModelAttribute("formSave") ClassForm form,BindingResult result,ModelMap map) {
+		
+		if(result.hasErrors()) {
+			map.put("teachers", teacherService.getAvailableTeachers());
+			return "classes-edit";
+		}
+		
 		var id = classService.save(form);
 		return "redirect:/classes/%d".formatted(id);
 		
@@ -67,7 +76,12 @@ public class ClassController {
 	}
 
 	@PostMapping("saveRegistration")
-	public String saveRegistration(@ModelAttribute("regiForm")RegistrationForm form) {
+	public String saveRegistration(@Valid @ModelAttribute("regiForm")RegistrationForm form,BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "registration-edit";
+		}
+		
 		regService.save(form);
 		return "redirect:/classes/registration/%d/%d".formatted(form.getClassId(),form.getStudentId());
 	}

@@ -2,6 +2,9 @@ package com.jdc.leaves.model.dto.input;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,16 +35,22 @@ public class RegistrationForm {
 
 	private int id;
 	private int classId;
+	
+	@NotNull(message = "Please enter registration date !")
 	private LocalDate registrationDate;
 
 	private int studentId;
 
+	@NotEmpty(message = "Please enter student name !")
 	private String studentName;
 
+	@NotEmpty(message = "Please enter email !")
 	private String email;
 
+	@NotEmpty(message = "Please enter phone number !")
 	private String phone;
 
+	@NotEmpty(message = "Please enter student's last education !")
 	private String education;
 
 }

@@ -38,6 +38,7 @@
        <sf:form modelAttribute="regiForm" method="post" action="${saveReg}" cssClass="col-6">
         <sf:hidden path="studentId"/>
         <sf:hidden path="classId"/>
+        <sf:hidden path="registrationDate"/>
         
         <div class="form-group mb-4">
         <div class="form-label"><b>Start Date : </b></div>
