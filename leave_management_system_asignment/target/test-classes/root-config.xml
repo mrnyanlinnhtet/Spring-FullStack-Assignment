@@ -40,12 +40,5 @@
 	<!-- Transaction Manager Annotation Driven-->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	<!-- Authentication Manger Configuration -->
-	<security:authentication-manager>
-		<security:authentication-provider
-			user-service-ref="leaveUserService">
-		<security:password-encoder ref="encoder" />
-		</security:authentication-provider>
-		
-	</security:authentication-manager>
+	
 </beans>

@@ -35,32 +35,33 @@
 		<h1 class="my-4 text-success">
 			<i class="fas fa-id-card"></i> <b>Class Management</b>
 		</h1>
-
-		<form class="row">
+        
+        <c:url value="/classes" var="search"></c:url>
+		<form class="row" action="${search}">
 
 			<div class="col">
 				<div class="form-group">
-					<label for="name"><b>Teacher Name : </b></label> <input type="text"
-						id="name" class="form-control" placeholder="Enter Teacher Name !" />
+					<label for="name"><b>Teacher Name : </b></label> <input type="text" value="${param.teacher}"
+						id="name" name="teacher" class="form-control" placeholder="Enter Teacher Name !" />
 				</div>
 			</div>
 
 			<div class="col">
 				<div class="form-group">
-					<label for="from"><b>Date From : </b></label> <input type="date"
-						id="from" class="form-control" />
+					<label for="from"><b>Date From : </b></label> <input type="date" value="${param.from}"
+						id="from" name="form" class="form-control" />
 				</div>
 			</div>
 
 			<div class="col">
 				<div class="form-group">
-					<label for="to"><b>Date To : </b></label> <input type="date"
-						id="to" class="form-control" />
+					<label for="to"><b>Date To : </b></label> <input type="date" value="${param.to}"
+						id="to" name="to" class="form-control" />
 				</div>
 			</div>
 
 			<div class="col btn-wrapper">
-				<button class="btn btn-outline-success mx-3">
+				<button type="submit"  class="btn btn-outline-success mx-3">
 					Search <i class="fas fa-search"></i>
 				</button>
 				<c:url value="/classes/edit" var="addNew"></c:url>
@@ -74,8 +75,15 @@
 
 
 	<div class="container my-4">
-
-		<table class="table table-striped table-hover">
+	
+	 <c:choose>
+	 <c:when test="${empty list}">
+	 <div class="alert alert-info">There is no techer in class !</div>
+	 </c:when>
+	 
+	 <c:otherwise>
+	 
+	 <table class="table table-striped table-hover">
 
 			<thead>
 				<tr>
@@ -91,28 +99,37 @@
 			</thead>
 
 			<tbody>
+			<c:forEach items="${list}" var="c">
 				<tr>
-					<td>1</td>
-					<td>Mr.Nyan Linn Htet</td>
-					<td>09444859894</td>
-					<td>2022-09-12</td>
-					<td>3</td>
-					<td>45</td>
-					<td>Spring Framework Class</td>
+					<td>${c.id}</td>
+					<td>${c.teacherName }</td>
+					<td>${c.teacherPhone}</td>
+					<td>${c.startDate}</td>
+					<td>${c.months }</td>
+					<td>${c.studentCount}</td>
+					<td>${c.description}</td>
 					<td><c:url value="/classes/edit" var="classEdit">
-							<c:param name="id" value="1"></c:param>
+							<c:param name="id" value="${c.id}"></c:param>
+							
 						</c:url> 
 						
 					<a href="${classEdit}" class="mx-4"><i class="fas fa-pencil-alt"></i></a> 
 					
-					<c:url value="/classes/1" var="class_detail"></c:url>
+					<c:url value="/classes/${c.id}" var="class_detail">
+					</c:url>
                     <a href="${class_detail}"><i class="fas fa-external-link-square-alt"></i></a>
 						
 						</td>
 				</tr>
+				</c:forEach>
 			</tbody>
 
 		</table>
+	 
+	 </c:otherwise>
+	 </c:choose>
+
+		
 
 	</div>
 

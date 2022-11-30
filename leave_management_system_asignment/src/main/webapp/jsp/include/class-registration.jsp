@@ -4,7 +4,6 @@
 <table class="table table-hover table-striped">
   <thead>
    <tr>
-   <th>Id</th>
    <th>Registration Date</th>
    <th>Student</th>
    <th>Phone</th>
@@ -12,23 +11,24 @@
    </tr>
   </thead>
   <tbody>
+   <c:forEach items="${dto.registrations}" var="r">
    <tr>
-     <td>1</td>
-     <td>2022-01-12</td>
-     <td>Nyan Linn Htet</td>
-     <td>09444859894</td>
+     <td>${r.registrationDate }</td>
+     <td>${r.student }</td>
+     <td>${r.studentPhone }</td>
      <td>
      <c:url value="/classes/registration" var="regEdit">
+     <c:param name="classId" value="${r.classId}"></c:param>
+     <c:param name="studentId" value="${r.studentId}"></c:param>
      </c:url>
       <a href="${regEdit}" class="mx-3"><i class="fas fa-pencil-alt"></i></a>
-      
-      
-      
-      
-      <c:url value="/classes/registration/0/0" var="reg_detail">
+     
+     
+      <c:url value="/classes/registration/${r.classId}/${r.studentId}" var="reg_detail">
       </c:url>
       <a href="${reg_detail}"><i class="fas fa-external-link-square-alt"></i></a>
      </td>
    </tr>
+   </c:forEach>
   </tbody>
 </table>

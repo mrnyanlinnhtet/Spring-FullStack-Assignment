@@ -42,25 +42,31 @@
    <!-- For student name -->
    <div class="form-group mb-4">
     <label for="name" class="form-label"><b>Student Name : </b></label>
-    <span class="form-control">Mg Win Maung</span>
+    <span class="form-control">${dto.student.name }</span>
    </div>
    
    <!-- For student phone -->
    <div class="form-group mb-4">
     <label for="name" class="form-label"><b>Phone Number : </b></label>
-    <span class="form-control">094455345</span>
+    <span class="form-control">${dto.student.phone}</span>
    </div>
    
-   <!-- For student name -->
+   <!-- For student email -->
    <div class="form-group mb-4">
     <label for="name" class="form-label"><b>Email Address : </b></label>
-    <span class="form-control">maung@gmail.com</span>
+    <span class="form-control">${dto.student.email }</span>
    </div>
    
-   <!-- For student name -->
-   <div class="form-group mb-4">
+   <!-- For student education -->
+  <!--   <div class="form-group mb-4">
     <label for="name" class="form-label"><b>Education : </b></label>
-    <span class="form-control">Final Year Computer Major</span>
+    <span class="form-control">${dto.student.education }</span>
+   </div>-->
+   
+   <!-- For registration -->
+   <div class="form-group mb-4">
+    <label for="name" class="form-label"><b>Registration Date : </b></label>
+    <span class="form-control">${dto.registDate }</span>
    </div>
    
    </div>
@@ -74,29 +80,31 @@
    <div class="card-header text-success"><b><i class="fas fa-users"></i> Class Information</b></div>
    <div class="card-body">
    
-   <!-- For student name -->
+   <!-- For teacher name -->
    <div class="form-group mb-4">
     <label for="name" class="form-label"><b>Teacher Name : </b></label>
-    <span class="form-control">Min Lwin</span>
+    <span class="form-control">${dto.classInfo.teacherName }</span>
    </div>
    
-   <!-- For student name -->
+   <!-- For start date -->
    <div class="form-group mb-4">
     <label for="name" class="form-label"><b>Start Date : </b></label>
-    <span class="form-control">2022-12-12</span>
+    <span class="form-control">${dto.classInfo.startDate }</span>
    </div>
    
-   <!-- For student name -->
+   <!-- For months -->
    <div class="form-group mb-4">
     <label for="name" class="form-label"><b>Duration : </b></label>
-    <span class="form-control">6 Months</span>
+    <span class="form-control">${dto.classInfo.months } Months</span>
    </div>
    
-   <!-- For student name -->
+   <!-- For reasons -->
    <div class="form-group mb-4">
     <label for="name" class="form-label"><b>Description : </b></label>
-    <span class="form-control">One Stop Java</span>
+    <span class="form-control">${dto.classInfo.description }</span>
    </div>
+   
+  
    
    </div>
    </div>
@@ -106,8 +114,14 @@
    
     <div>
     <c:url value="/classes/registration" var="regEdit">
+       <c:param name="studentId" value="${dto.student.id }"></c:param>
+     <c:param name="classId" value="${dto.classInfo.id }"></c:param>
     </c:url>
-     <a href="${regEdit }" class="btn btn-outline-danger">Edit Registration</a>
+     <a href="${regEdit}" class="btn btn-outline-danger">Edit Registration <i class="fas fa-pencil-alt"></i></a>
+     
+     <c:url value="/classes/${dto.classInfo.id}" var="classDetail">
+     </c:url>
+     <a href="${classDetail}" class="btn btn-outline-info mx-2">Class Detail <i class="fas fa-info-circle"></i></a>
     </div>
   
   </div>

@@ -31,29 +31,29 @@
    <h1 class="my-4 text-success"><b><i class="fas fa-info-circle"></i> Class Details</b></h1>
     <div class="card my-4">
     <div class="card-header text-success"><b><i class="fas fa-info"></i> Class Information</b></div>
+     
     <div class="card-body row">
-    
      <div class="col">
       <label for="teacher" class="form-label"><b>Teacher : </b></label>
-      <span class="form-control">Min Lwin</span>
+      <span class="form-control">${dto.classInfo.teacherName}</span>
      </div>
      
       <div class="col">
       <label for="teacher" class="form-label"><b>Start Date : </b></label>
-      <span class="form-control">2022-10-10</span>
+      <span class="form-control">${dto.classInfo.startDate }</span>
      </div>
      
       <div class="col">
       <label for="teacher" class="form-label"><b>Duration :  </b></label>
-      <span class="form-control">5 Months</span>
+      <span class="form-control">${dto.classInfo.months} Months</span>
      </div>
      
       <div class="col">
       <label for="teacher" class="form-label"><b>Description :  </b></label>
-      <span class="form-control">Spring and Angular</span>
+      <span class="form-control">${dto.classInfo.description }</span>
      </div>
-    
     </div>
+   
     </div>
     <!-- End of Card -->
     
@@ -72,12 +72,16 @@
      
      <div>
       <c:url value="/classes/registration" var="class_reg">
-       <c:param name="classId" value="1"></c:param>
+       <c:param name="classId" value="${dto.classInfo.id}"></c:param>
+       <c:param name="teacherName" value="${dto.classInfo.teacherName}"></c:param>
+       <c:param name="startDate" value="${dto.classInfo.startDate }"></c:param>
       </c:url>
-      
       <a href="${class_reg}" class="btn btn-outline-danger">Add New Registration <i class="fas fa-user-plus"></i></a>
-      <c:url value="/classes/edit" var="class_edit">
       
+      
+      
+      <c:url value="/classes/edit" var="class_edit">
+       <c:param name="id" value="${dto.classInfo.id}"></c:param>
       </c:url>
       <a href="${class_edit}" class="btn btn-outline-warning">Edit Class <i class="fas fa-pen"></i></a>
      </div>
@@ -87,14 +91,30 @@
      <!-- End of justify -->
      <div class="tab-content" id="content">
      <div class="tab-pane fade show active" id="registration">
-     <!-- Registration Form -->
+     <c:choose>
+     <c:when test="${empty dto.registrations }">
+      <div class="alert alert-info">There is no registration data !</div>
+     </c:when>
+     <c:otherwise>
+      <!-- Registration Form -->
      <c:url value="/jsp/include/class-registration.jsp" var="reg"></c:url>
       <c:import url="${reg}"></c:import>
+     </c:otherwise>
+     </c:choose>
      </div>
+     
       <div class="tab-pane fade" id="leaves">
-      <!-- Leaves -->
+       <c:choose>
+     <c:when test="${empty dto.leaves }">
+      <div class="alert alert-info">There is no leaves data !</div>
+     </c:when>
+     <c:otherwise>
+     <!-- Leaves -->
       <c:url value="/jsp/include/class-leaves.jsp" var="leave"></c:url>
       <c:import url="${leave}"></c:import>
+     </c:otherwise>
+     </c:choose>
+      
       </div>
      </div>
     

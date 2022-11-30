@@ -30,44 +30,48 @@
   </c:import>
 
   <div class="container">
-    <h1 class="text-success my-4">${empty param.studentId?'Edit':'Add New' } Registration</h1>
+    <h1 class="text-success my-4">${not empty param.studentId > '0' ? 'Edit' : 'Add New'} Registration</h1>
      
       <div class="row">
       
-       <c:url value="/classes/saveRegistration" var="saveReg"></c:url>
-       <sf:form modelAttribute="regiForm" method="post" action="${saveReg}" cssClass="col-6">
+     
+       <sf:form modelAttribute="regiForm" method="post" cssClass="col-6">
         <sf:hidden path="studentId"/>
         <sf:hidden path="classId"/>
         <sf:hidden path="registrationDate"/>
         
         <div class="form-group mb-4">
         <div class="form-label"><b>Start Date : </b></div>
-        <span class="form-control">2022-09-2022</span>
+        <span class="form-control">${not empty param.startDate ? param.startDate : classInfo.startDate}</span>
         </div>
         
         <div class="form-group mb-4">
         <div class="form-label"><b>Teacher : </b></div>
-        <span class="form-control">Min Lwin</span>
+        <span class="form-control">${not empty param.teacherName ? param.teacherName : classInfo.teacherName}</span>
         </div>
         
         <div class="form-group mb-4">
         <label for="name" class="form-label"><b>Student Name : </b></label>
-        <sf:input path="studentName" cssClass="form-control" placeholder="Enter Student Name !" id="name"/>
+        <sf:input path="studentName" type="text" cssClass="form-control" placeholder="Enter Student Name !" id="name"/>
+        <sf:errors path="studentName" cssClass="text-danger"></sf:errors>
         </div>
         
         <div class="form-group mb-4">
         <label for="email" class="form-label"><b>Email Address : </b></label>
         <sf:input path="email" type="email" cssClass="form-control" placeholder="Enter Email Address !" id="email"/>
+        <sf:errors path="email" cssClass="text-danger"></sf:errors>
         </div>
         
         <div class="form-group mb-4">
         <label for="phone" class="form-label"><b>Phone Number : </b></label>
         <sf:input path="phone" type="tel" cssClass="form-control" placeholder="Enter Phone Number !" id="phone"/>
+        <sf:errors path="phone" cssClass="text-danger"></sf:errors>
         </div>
         
         <div class="form-group mb-4">
         <label for="edu" class="form-label"><b>Last Education : </b></label>
         <sf:input path="education" cssClass="form-control" placeholder="Enter Last Education !" id="edu"/>
+        <sf:errors path="education" cssClass="text-danger"></sf:errors>
         </div>
         
         <div>

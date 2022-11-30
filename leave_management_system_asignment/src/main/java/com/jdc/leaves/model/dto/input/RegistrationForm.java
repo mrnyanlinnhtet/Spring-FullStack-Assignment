@@ -3,7 +3,8 @@ package com.jdc.leaves.model.dto.input;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,10 +34,9 @@ public class RegistrationForm {
 
 
 
-	private int id;
 	private int classId;
 	
-	@NotNull(message = "Please enter registration date !")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate registrationDate;
 
 	private int studentId;

@@ -35,8 +35,8 @@
    <div class="row">
    
    <!-- Form -->
-    <c:url value="/classes" var="save"></c:url>
-    <sf:form action="${save}" method="post" cssClass="col-6" modelAttribute="formSave">
+      <c:url value="/classes" var="save"></c:url>
+    <sf:form action="${save}"  method="post" cssClass="col-6" modelAttribute="formSave">
     
      <sf:hidden path="id"/>
      

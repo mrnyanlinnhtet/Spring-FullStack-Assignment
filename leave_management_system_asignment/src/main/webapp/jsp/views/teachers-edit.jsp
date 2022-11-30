@@ -39,7 +39,8 @@
 	    
 	    <c:url value="/teachers" var="teacherSaveLink"></c:url>
 	     <sf:form action="${teacherSaveLink }" method="post" modelAttribute="form" cssClass="col-6">
-	     
+	      <sf:hidden path="id"/>
+	      
 	     <div class="form-group">
 	       <label for="name" class="form-label"><b>Teacher Name : </b></label>
 	       <sf:input path="name" type="text" id="name" placeholder="Enter Teacher Name !" cssClass="form-control"/>
@@ -52,7 +53,7 @@
 	       <sf:errors path="phone" cssClass="text-danger"></sf:errors>
 	      </div>
 	      
-	      <div class="form-group my-4">
+	      <div class="form-group my-4 ${empty param.id?'':'d-none'}">
 	       <label for="email" class="form-label"><b>Teacher's Email : </b></label>
 	       <sf:input path="email" type="email" id="email" placeholder="Enter Teacher's Email !" cssClass="form-control"/>
 	       <sf:errors path="email" cssClass="text-danger"></sf:errors>

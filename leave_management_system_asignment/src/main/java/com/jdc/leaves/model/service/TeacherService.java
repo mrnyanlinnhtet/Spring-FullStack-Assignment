@@ -72,6 +72,7 @@ public class TeacherService {
 	public int save(TeacherForm form) {
 		if (form.getId() == 0) {
 			return insert(form);
+			
 		}
 		return edit(form);
 	}

@@ -24,10 +24,10 @@ public class TeacherServiceTest {
 	@Autowired
 	private TeacherService service;
 
-	@Order(3)
+	@Order(1)
 	@ParameterizedTest
 	@Sql(scripts = "/sql/truncate_db.sql")
-	@CsvSource(value = "0,Min Lwin,09223453,lwinmin@gmail.com,2022-09-09")
+	@CsvSource(value = "1,Min Lwin,09223453,lwinmin@gmail.com,2022-09-10")
 	void save_insert_success(int id, String name, String phone, String email, LocalDate assignDate) {
 		var form = new TeacherForm(id, name, phone, email, assignDate);
 		var result = service.save(form);

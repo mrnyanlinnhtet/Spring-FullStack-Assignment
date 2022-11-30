@@ -47,7 +47,7 @@
 		transaction-manager="transactionManager" />
 	
 	<!-- Bean for LeaveApplicationUserService Class -->
-	<bean id="leaveUserService" class="com.jdc.leaves.model.security.LeaveApplicationUserService">
+	  <bean id="leaveUserService" class="com.jdc.leaves.model.security.LeaveApplicationUserService">
 	 <constructor-arg ref="dataSource"></constructor-arg>
 	</bean>
 
@@ -77,7 +77,7 @@
 		<security:intercept-url pattern="/classes/**"
 			access='hasAnyAuthority("Admin","Teacher")' />
 		<security:intercept-url pattern="/leaves/**"
-			access='hasAnyAuthority("Admin","Teacher","Student")' />
+			access='hasAuthority("Student")' />
 		<security:intercept-url pattern="/students/**"
 			access='hasAnyAuthority("Admin","Teacher")' />
 		<security:intercept-url pattern="/teachers/**"

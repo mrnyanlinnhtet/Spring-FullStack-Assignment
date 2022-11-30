@@ -16,14 +16,16 @@
   </thead>
   
   <tbody>
+  <c:forEach items="${dto.leaves }" var="l">
    <tr>
-    <td>Nyan Linn Htet</td>
-    <td>093345678</td>
-    <td>2022-10-10</td>
-    <td>2022-10-15</td>
-    <td>5 Days</td>
-    <td>For Family Case</td>
+    <td>${l.student}</td>
+    <td>${l.studentPhone }</td>
+    <td>${l.applyDate }</td>
+    <td>${l.startDate }</td>
+    <td>${l.days} Days</td>
+    <td>${l.reason}</td>
    </tr>
+   </c:forEach>
   </tbody>
 
-</table>
+</table> 
