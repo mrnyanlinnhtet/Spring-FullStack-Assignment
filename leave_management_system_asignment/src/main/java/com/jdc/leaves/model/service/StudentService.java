@@ -29,6 +29,8 @@ public class StudentService {
 	private SimpleJdbcInsert studentInsert;
 
 	@Autowired
+	private RegistrationService registrationService;
+	@Autowired
 	private PasswordEncoder encoder;
 	private final String SELECT_PROJECTION = """
 			SELECT s.id,a.name,s.phone,a.email,s.education,COUNT(r.classes_id) classCount
@@ -81,11 +83,11 @@ public class StudentService {
 
 	// Find By Email
 	public Integer findByEmail(String email) {
-		final String FIND_BY_EMAIL_QUERY = "%s AND email LIKE :email %s".formatted(SELECT_PROJECTION, SELECT_GROUP_BY);
+		final String FIND_BY_EMAIL_QUERY = "SELECT s.id FROM student s JOIN account a ON s.id = a.id WHERE a.email LIKE :email";
 		var params = new HashMap<String, Object>();
 		params.put("email", email.toLowerCase().concat("%"));
-
 		return template.queryForList(FIND_BY_EMAIL_QUERY, params,Integer.class).stream().findFirst().orElse(null);
+		
 	}
 
 	// Create Student Process
@@ -117,9 +119,18 @@ public class StudentService {
 		return template.queryForObject(FIND_BY_ID_QUERY, param, new BeanPropertyRowMapper<>(StudentListVO.class));
 	}
 
-	public StudentDetailVO findDetailByLoginId(String loginId) {
-		// TODO Auto-generated method stub
-		return null;
+	public StudentDetailVO findDetailByLoginId(String email) {
+		var detail = new StudentDetailVO();
+		
+		//Find student Id 
+		var studentId = findByEmail(email);
+		
+		//Set Student
+		detail.setStudent(findById(studentId));
+		//Set Registration
+		detail.setRegistration(registrationService.searchByStudentId(studentId));
+		
+		return detail;
 	}
 	
 	

@@ -38,10 +38,5 @@ public class LeaveSummaryVO {
 		this.details = vo.getDescription();
 	}
     
-//	@Override
-//	public String toString() {
-//		return "Data  "+getClassId()+getTeacher()+getStartDate()+getStudents()+getDetails();
-//	}
-    
 
 }

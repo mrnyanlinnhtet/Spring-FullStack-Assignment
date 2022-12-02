@@ -49,7 +49,7 @@
 			<div class="col">
 				<div class="form-group">
 					<label for="from"><b>Date From : </b></label> <input type="date" value="${param.from}"
-						id="from" name="form" class="form-control" />
+						id="from" name="from" class="form-control" />
 				</div>
 			</div>
 

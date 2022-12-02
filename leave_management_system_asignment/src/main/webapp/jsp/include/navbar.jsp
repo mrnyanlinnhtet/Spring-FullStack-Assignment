@@ -37,11 +37,12 @@
       </li>
       </sec:authorize>
       
-      
+      <!-- Authority For leaves  -->
+      <sec:authorize access="hasAuthority('Student')">
       <li class="nav-item">
       <a href="${leaves}" class="nav-link ${param.view eq 'leaves' ? 'active':'' }"><i class="fas fa-address-book"></i> Leaves</a>
       </li>
-      
+      </sec:authorize>
       <li class="nav-item">
       <a  id="signoutLink" class="nav-link" style="cursor: pointer;"><i class="fas fa-user-lock"></i> Sign Out</a>
       </li>

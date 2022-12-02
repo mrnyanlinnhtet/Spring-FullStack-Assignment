@@ -39,7 +39,7 @@
       
       <div class="col-3">
        <div class="form-group  my-5">
-         <button class="btn btn-outline-success">Search <i class="fas fa-search"></i></button>
+         <button type="submit" class="btn btn-outline-success">Search <i class="fas fa-search"></i></button>
         </div>
       </div>
       
@@ -55,7 +55,8 @@
        <div class="card">
        <div class="card-body">
         <h4 class="text-danger mb-2"><i class="fas fa-user-graduate"></i> ${l.teacher}</h4>
-        <span class="text-secondary"><i class="fas fa-calendar-alt"></i> ${l.startDate}</span>
+        <div class="text-secondary my-2"><i class="fas fa-book-reader"></i> ${l.details}</div>
+        <span class="text-secondary mt-2"><i class="fas fa-calendar-alt"></i> ${l.startDate}</span>
         
         <div class="row mt-4">
         <div class="col-4">
