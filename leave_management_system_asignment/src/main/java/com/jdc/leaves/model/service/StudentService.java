@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jdc.leaves.model.dto.input.RegistrationForm;
+import com.jdc.leaves.model.dto.output.StudentDetailVO;
 import com.jdc.leaves.model.dto.output.StudentListVO;
 
 @Service
@@ -114,6 +115,11 @@ public class StudentService {
 		var param = new HashMap<String, Object>();
 		param.put("id", id);
 		return template.queryForObject(FIND_BY_ID_QUERY, param, new BeanPropertyRowMapper<>(StudentListVO.class));
+	}
+
+	public StudentDetailVO findDetailByLoginId(String loginId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

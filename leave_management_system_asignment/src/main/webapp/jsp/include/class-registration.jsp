@@ -26,7 +26,7 @@
      
       <c:url value="/classes/registration/${r.classId}/${r.studentId}" var="reg_detail">
       </c:url>
-      <a href="${reg_detail}"><i class="fas fa-external-link-square-alt"></i></a>
+      <a href="${reg_detail}"><i class="fas fa-location-arrow"></i></a>
      </td>
    </tr>
    </c:forEach>

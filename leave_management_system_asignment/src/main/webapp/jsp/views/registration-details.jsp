@@ -121,7 +121,7 @@
      
      <c:url value="/classes/${dto.classInfo.id}" var="classDetail">
      </c:url>
-     <a href="${classDetail}" class="btn btn-outline-info mx-2">Class Detail <i class="fas fa-info-circle"></i></a>
+     <a href="${classDetail}" class="btn btn-outline-info mx-2"><i class="fas fa-location-arrow"></i> Class Detail</a>
     </div>
   
   </div>

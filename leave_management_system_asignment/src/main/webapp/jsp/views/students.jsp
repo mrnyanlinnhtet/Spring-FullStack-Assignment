@@ -35,32 +35,33 @@
 			<i class="fas fa-user-graduate"></i> <b>Student Management</b>
 		</h1>
 
-		<form class="row">
+         <c:url value="/students" var="search"></c:url>
+		<form class="row" action="${search}">
 
 			<div class="col">
 				<div class="form-group">
-					<label for="name"><b>Name : </b></label> <input type="text"
-						class="form-control" placeholder="Enter Student Name !" id="name" />
+					<label for="name"><b>Name : </b></label> <input type="text" value="${param.name}"
+					name="name" class="form-control" placeholder="Enter Student Name !" id="name" />
 				</div>
 			</div>
 
 			<div class="col">
 				<div class="form-group">
-					<label for="phone"><b>Phone : </b></label> <input type="tel"
-						class="form-control" placeholder="Enter Phone Number !" id="phone" />
+					<label for="phone"><b>Phone : </b></label> <input type="tel" value="${param.phone}"
+					name="phone" class="form-control" placeholder="Enter Phone Number !" id="phone" />
 				</div>
 			</div>
 
 			<div class="col">
 				<div class="form-group">
-					<label for="email"><b>Email : </b></label> <input type="email"
-						class="form-control" placeholder="Enter Email Address !"
+					<label for="email"><b>Email : </b></label> <input type="email" value="${param.email}"
+					name="email" class="form-control" placeholder="Enter Email Address !"
 						id="email" />
 				</div>
 			</div>
 			
 			<div class="col btn-wrapper">
-			   <button class="btn btn-outline-success">Search  <i class="fas fa-search"></i></button>
+			   <button type="submit" class="btn btn-outline-success">Search  <i class="fas fa-search"></i></button>
 			</div>
 
 		</form>
@@ -81,14 +82,16 @@
 				</thead>
 
 				<tbody>
+				<c:forEach items="${studentDto}" var="s">
 					<tr>
-						<td>1</td>
-						<td>Aye Myat Mon</td>
-						<td>09890758076</td>
-						<td>ms.ayemyatmon@gmail.com</td>
-						<td>Student</td>
-						<td>2</td>
+						<td>${s.id}</td>
+						<td>${s.name}</td>
+						<td>${s.phone}</td>
+						<td>${s.email}</td>
+						<td>${s.education}</td>
+						<td>${s.classCount}</td>
 					</tr>
+					</c:forEach>
 				</tbody>
 
 			</table>

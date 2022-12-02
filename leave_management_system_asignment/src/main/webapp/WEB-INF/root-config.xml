@@ -77,7 +77,7 @@
 		<security:intercept-url pattern="/classes/**"
 			access='hasAnyAuthority("Admin","Teacher")' />
 		<security:intercept-url pattern="/leaves/**"
-			access='hasAuthority("Student")' />
+			access='hasAnyAuthority("Admin","Teacher","Student")' />
 		<security:intercept-url pattern="/students/**"
 			access='hasAnyAuthority("Admin","Teacher")' />
 		<security:intercept-url pattern="/teachers/**"

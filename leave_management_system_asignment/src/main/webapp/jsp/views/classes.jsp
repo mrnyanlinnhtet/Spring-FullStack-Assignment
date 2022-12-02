@@ -117,7 +117,7 @@
 					
 					<c:url value="/classes/${c.id}" var="class_detail">
 					</c:url>
-                    <a href="${class_detail}"><i class="fas fa-external-link-square-alt"></i></a>
+                    <a href="${class_detail}"><i class="fas fa-location-arrow"></i></a>
 						
 						</td>
 				</tr>
