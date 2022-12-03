@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Leave Home</title>
+<title>${ empty param.id ?'Add New Class':'Edit Class'}</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -31,7 +31,7 @@
   
   <div class="container">
   
-   <h1 class="text-success my-3"><b>${param.id eq '0'?'<i class="fas fa-user-plus"></i> Add New Class':'<i class="fas fa-user-edit"></i> Edit Class'}</b></h1>
+   <h1 class="text-success my-3"><b>${empty param.id ? '<i class="fas fa-user-plus"></i> Add New Class':'<i class="fas fa-user-edit"></i> Edit Class'}</b></h1>
    <div class="row">
    
    <!-- Form -->

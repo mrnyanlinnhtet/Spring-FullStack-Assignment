@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Leave Home</title>
+<title>${not empty param.studentId > '0' ? 'Edit' : 'Add New'} Registration</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -30,7 +30,7 @@
   </c:import>
 
   <div class="container">
-    <h1 class="text-success my-4">${not empty param.studentId > '0' ? 'Edit' : 'Add New'} Registration</h1>
+    <h1 class="text-success my-4"><i class="fas fa-user-edit"></i> ${not empty param.studentId > '0' ? 'Edit' : 'Add New'} Registration</h1>
      
       <div class="row">
       

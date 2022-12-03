@@ -27,27 +27,27 @@ public class LeavesServiceTest {
 	@Autowired
 	private LeaveService service;
 
-	@Order(1)
-	@ParameterizedTest
-	@Sql(scripts = {"/sql/truncate_db.sql","/sql/leaves.sql"})
-	@CsvSource(value = {
-			",,,,2",
-			"1,,,,1",
-			"2,,,,1",
-			",Nyan Linn Htet,,,1",
-			",Aye Myat Mon,,,1",
-			",,2022-11-23,2022-11-26,2",
-		
-	})
-	void search_success(Integer classId,String studentName,LocalDate from ,LocalDate to,int size) {
-		
-		var result  = service.search(Optional.ofNullable(classId), Optional.ofNullable(studentName),
-				Optional.ofNullable(from), Optional.ofNullable(to));
-		
-	   assertNotNull(result);
-	   assertEquals(result.size(),size);
-		
-	}
+//	@Order(1)
+//	@ParameterizedTest
+//	@Sql(scripts = {"/sql/truncate_db.sql","/sql/leaves.sql"})
+//	@CsvSource(value = {
+//			",,,,2",
+//			"1,,,,1",
+//			"2,,,,1",
+//			",Nyan Linn Htet,,,1",
+//			",Aye Myat Mon,,,1",
+//			",,2022-11-23,2022-11-26,2",
+//		
+//	})
+//	void search_success(Integer classId,String studentName,LocalDate from ,LocalDate to,int size) {
+//		
+//		var result  = service.search(Optional.ofNullable(classId), Optional.ofNullable(studentName),
+//				Optional.ofNullable(from), Optional.ofNullable(to));
+//		
+//	   assertNotNull(result);
+//	   assertEquals(result.size(),size);
+//		
+//	}
 
 	@Order(2)
 	@ParameterizedTest

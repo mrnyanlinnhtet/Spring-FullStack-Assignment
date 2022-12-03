@@ -10,6 +10,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,9 +27,11 @@ public class LeaveForm {
     private int studentId;
 
     @NotNull(message = "Please enter apply date !")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applyDate;
 
     @NotNull(message = "Please enter start date !")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @Min(value = 2,message = "Please enter leave day !")

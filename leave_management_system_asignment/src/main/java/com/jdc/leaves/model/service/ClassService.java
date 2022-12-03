@@ -113,7 +113,7 @@ public class ClassService {
 
 		// For Leaves
 		classDetail.setLeaves(
-				leaveService.search(Optional.of(classId), Optional.empty(), Optional.empty(), Optional.empty()));
+				leaveService.search(Optional.of(classId),Optional.empty(), Optional.empty()));
 
 		return classDetail;
 	}

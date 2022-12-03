@@ -12,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import com.jdc.leaves.model.dto.input.LeaveForm;
 import com.jdc.leaves.model.dto.output.LeaveListVO;
@@ -32,11 +35,11 @@ public class LeaveService {
 
 	private final String SELECT_PROJECTION = """
 			SELECT DISTINCT l.apply_date applyDate, l.classes_id classId, l.student_id studentId, l.start_date startDate,
-			l.days, l.reason, sa.name student, s.phone studentPhone, c.teacher_id teacherId, ta.name teacher,
+			l.days, l.reason, sa.name student, s.phone studentPhone, c.teacher_id teacherId, at.name teacher,
 			c.start_date classStart, c.description classInfo
 			FROM leaves l JOIN classes c ON l.classes_id = c.id
 			JOIN teacher t ON c.teacher_id = t.id
-			JOIN account ta ON t.id = ta.id
+			JOIN account at ON t.id = at.id
 			JOIN student s ON l.student_id = s.id
 			JOIN account sa ON s.id = sa.id
 			JOIN leaves_day ld ON
@@ -58,22 +61,29 @@ public class LeaveService {
 	}
 
 	// Search Process
-	public List<LeaveListVO> search(Optional<Integer> classId, Optional<String> studentName, Optional<LocalDate> from,
+	public List<LeaveListVO> search(Optional<Integer> classId, Optional<LocalDate> from,
 			Optional<LocalDate> to) {
 
 		var where = new StringBuffer();
 		var params = new HashMap<String, Object>();
+		
+		//Authentication Process
+		var auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		if(auth.isAuthenticated() && auth.getAuthorities().contains(authority("Student"))) {
+			
+			if(auth instanceof UsernamePasswordAuthenticationToken token) {
+				where.append(" AND sa.email = :username");
+				params.put("username", token.getName());
+			}
+		}
 
 		where.append(classId.filter(a -> a != null && a > 0).map(a -> {
 			params.put("classId", a);
 			return " AND classes_id =:classId";
 		}).orElse(""));
 
-		where.append(studentName.filter(StringUtils::hasLength).map(a -> {
-			params.put("studentName", a);
-			return " AND LOWER(sa.name) LIKE :studentName";
-		}).orElse(""));
-
+	
 		where.append(from.filter(a -> a != null).map(a -> {
 			params.put("from", Date.valueOf(a));
 			return " AND ld.leaves_apply_date >= :from ";
@@ -138,6 +148,10 @@ public class LeaveService {
 		params.put("classId", classId);
 
 		return template.queryForObject(LEAVES_COUNT, params, Long.class);
+	}
+	
+	private GrantedAuthority authority(String role) {
+		return AuthorityUtils.commaSeparatedStringToAuthorityList(role).get(0);
 	}
 
 }

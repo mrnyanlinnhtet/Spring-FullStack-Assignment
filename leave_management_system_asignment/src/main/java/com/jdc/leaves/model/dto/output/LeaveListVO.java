@@ -11,29 +11,33 @@ import lombok.Setter;
 @Setter
 public class LeaveListVO {
 
-    public LeaveListVO() {
-    }
+	public LeaveListVO() {
+	}
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applyDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate applyDate;
 
-    private int classId;
+	private String classInfo;
 
-    private int studentId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate classStartDate;
+	private int classId;
 
-    private String student;
+	private int studentId;
 
-    private String studentPhone;
+	private String student;
 
-    private int teacherId;
+	private String studentPhone;
 
-    private String teacher;
+	private int teacherId;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate startDate;
+	private String teacher;
 
-    private int days;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate startDate;
 
-    private String reason;
+	private int days;
+
+	private String reason;
 
 }
