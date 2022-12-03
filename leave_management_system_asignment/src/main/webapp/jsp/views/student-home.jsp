@@ -25,6 +25,71 @@
 <body>
 
   <c:import url="/jsp/include/navbar.jsp"></c:import>
+  
+  <div class="container">
+  <h1 class="text-success my-4"><b><i class="fas fa-home"></i> Student Home</b></h1>
+  
+  <div class="row">
+  <div class="col-4">
+  <div class="card mt-3">
+  <div class="card-header text-success"><b><i class="fas fa-user-tie"></i>  Personal Information</b></div>
+  <div class="card-body">
+  
+    <div class="my-3">
+     <span class="text-secondary"><i class="far fa-user-circle"></i>  Name</span>
+     <h5 class="text-primary">${student.student.name}</h5>
+    </div>
+    
+     <div class="mb-3">
+     <span class="text-secondary"><i class="fas fa-phone-alt"></i>  Phone</span>
+      <h5 class="text-primary">${student.student.phone}</h5>
+    </div>
+    
+    <div class="mb-3">
+     <span class="text-secondary"><i class="fas fa-envelope"></i>  Email</span>
+      <h5 class="text-primary">${student.student.email}</h5>
+    </div>
+    
+     <div class="my-3">
+     <span class="text-secondary"><i class="fas fa-graduation-cap"></i>  Education</span>
+      <h5 class="text-primary">${student.student.education}</h5>
+    </div>
+    
+  </div>
+  </div>
+  </div>
+  
+   <div class="col">
+     <h4 class="text-success mt-3"><b><i class="fas fa-address-card"></i>  Registration</b></h4>
+     <div class="row g-3">
+     <div class="col-5">
+     <c:forEach items="${student.registration}" var="i">
+   	  <div class="card">
+   	  	<div class="card-body">
+   	  	 <h5 class="text-danger mb-3"><b><i class="fas fa-book-open"></i> ${i.classInfo }</b></h5>
+   	  	 
+   	  	 <div class="d-flex justify-content-between mb-4">
+   	  	   <span class="text-primary"><b><i class="fas fa-user-graduate"></i> ${i.teacher}</b></span>
+   	  	   <span class="text-primary"><b><i class="far fa-calendar-alt"></i> ${i.startDate}</b></span>
+   	  	 </div>
+   	  	 
+   	  	 <div>
+   	  	 <c:url value="/leaves/edit" var="leaves">
+   	  	 <c:param name="classId" value="${i.classId}"></c:param>
+   	  	 <c:param name="studentId" value="${i.studentId}"></c:param>
+   	  	 </c:url>
+   	  	 <a href="${leaves}" class="btn btn-outline-success"><i class="fas fa-location-arrow"></i>  Apply Leaves</a>
+   	  	 </div>
+   	  	</div>
+   	  </div>
+     </c:forEach>
+     </div>
+     
+     </div>
+   	 
+   </div>
+  </div>
+  </div>
 
 </body>
 </html>
